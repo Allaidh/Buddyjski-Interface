@@ -65,6 +65,7 @@ enum class AltFunc
     DCX_DOUT1_SPI_LCD,
     DIN_SPI_LCD,
     DOUT0_SPI_LCD,
+    CS_SPI_LCD,
 
     // PWM
     PWM1,
@@ -117,7 +118,10 @@ enum class AltFunc
     PCIe1_CLKREQN,
 
     PCIe2_PERSTN,
+    PCIe2_WAKEN,
     PCIe2_CLKREQN,
+
+    SPI3_FRM,
 
     // PRI
     PRI_TDI,
