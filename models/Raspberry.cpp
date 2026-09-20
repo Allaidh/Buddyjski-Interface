@@ -3,6 +3,128 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <limits>
+
+namespace
+{
+std::string altFuncName(AltFunc function)
+{
+    switch (function)
+    {
+        case AltFunc::NONE: return "NONE";
+        case AltFunc::GPIO: return "GPIO";
+        case AltFunc::I2C4_SDA: return "I2C4_SDA";
+        case AltFunc::I2C4_SCL: return "I2C4_SCL";
+        case AltFunc::AP_I2C2_SCL: return "AP_I2C2_SCL";
+        case AltFunc::AP_I2C2_SDA: return "AP_I2C2_SDA";
+        case AltFunc::AP_I2C3_SCL: return "AP_I2C3_SCL";
+        case AltFunc::AP_I2C3_SDA: return "AP_I2C3_SDA";
+        case AltFunc::AP_I2C4_SCL: return "AP_I2C4_SCL";
+        case AltFunc::AP_I2C4_SDA: return "AP_I2C4_SDA";
+        case AltFunc::R_I2C0_SCL: return "R_I2C0_SCL";
+        case AltFunc::R_I2C0_SDA: return "R_I2C0_SDA";
+        case AltFunc::I2C3_SCL: return "I2C3_SCL";
+        case AltFunc::I2C3_SDA: return "I2C3_SDA";
+        case AltFunc::UART1_TXD: return "UART1_TXD";
+        case AltFunc::UART1_RXD: return "UART1_RXD";
+        case AltFunc::UART1_CTS_N: return "UART1_CTS_N";
+        case AltFunc::UART1_RTS_N: return "UART1_RTS_N";
+        case AltFunc::UART4_TXD: return "UART4_TXD";
+        case AltFunc::UART4_RXD: return "UART4_RXD";
+        case AltFunc::UART4_CTS_N: return "UART4_CTS_N";
+        case AltFunc::UART5_TXD: return "UART5_TXD";
+        case AltFunc::UART5_RXD: return "UART5_RXD";
+        case AltFunc::UART5_CTS_N: return "UART5_CTS_N";
+        case AltFunc::UART5_RTS_N: return "UART5_RTS_N";
+        case AltFunc::UART8_TXD: return "UART8_TXD";
+        case AltFunc::UART8_RXD: return "UART8_RXD";
+        case AltFunc::UART8_CTSN: return "UART8_CTSN";
+        case AltFunc::UART8_RTS_N: return "UART8_RTS_N";
+        case AltFunc::UART9_TXD: return "UART9_TXD";
+        case AltFunc::UART9_RXD: return "UART9_RXD";
+        case AltFunc::R_UART0_TXD: return "R_UART0_TXD";
+        case AltFunc::R_UART1_RXD: return "R_UART1_RXD";
+        case AltFunc::R_UART1_TXD: return "R_UART1_TXD";
+        case AltFunc::R_UART1_CTS_N: return "R_UART1_CTS_N";
+        case AltFunc::R_UART1_RTS_N: return "R_UART1_RTS_N";
+        case AltFunc::R_SPI_RXD: return "R_SPI_RXD";
+        case AltFunc::R_SPI_TXD: return "R_SPI_TXD";
+        case AltFunc::R_SPI_SCLK: return "R_SPI_SCLK";
+        case AltFunc::R_SPI_FRM: return "R_SPI_FRM";
+        case AltFunc::SPI2_TXD: return "SPI2_TXD";
+        case AltFunc::SPI2_RXD: return "SPI2_RXD";
+        case AltFunc::SPI2_SCLK: return "SPI2_SCLK";
+        case AltFunc::SPI2_FRM: return "SPI2_FRM";
+        case AltFunc::SPI3_TXD: return "SPI3_TXD";
+        case AltFunc::SPI3_RXD: return "SPI3_RXD";
+        case AltFunc::SPI3_SCLK: return "SPI3_SCLK";
+        case AltFunc::SPI3_FRM: return "SPI3_FRM";
+        case AltFunc::DCLK_SPI_LCD: return "DCLK_SPI_LCD";
+        case AltFunc::DCX_DOUT1_SPI_LCD: return "DCX_DOUT1_SPI_LCD";
+        case AltFunc::DIN_SPI_LCD: return "DIN_SPI_LCD";
+        case AltFunc::DOUT0_SPI_LCD: return "DOUT0_SPI_LCD";
+        case AltFunc::CS_SPI_LCD: return "CS_SPI_LCD";
+        case AltFunc::PWM1: return "PWM1";
+        case AltFunc::PWM2: return "PWM2";
+        case AltFunc::PWM3: return "PWM3";
+        case AltFunc::PWM4: return "PWM4";
+        case AltFunc::PWM5: return "PWM5";
+        case AltFunc::PWM7: return "PWM7";
+        case AltFunc::PWM8: return "PWM8";
+        case AltFunc::PWM9: return "PWM9";
+        case AltFunc::PWM16: return "PWM16";
+        case AltFunc::R_PWM0: return "R_PWM0";
+        case AltFunc::R_PWM1: return "R_PWM1";
+        case AltFunc::R_PWM4: return "R_PWM4";
+        case AltFunc::R_PWM5: return "R_PWM5";
+        case AltFunc::R_PWM6: return "R_PWM6";
+        case AltFunc::R_PWM7: return "R_PWM7";
+        case AltFunc::R_PWM8: return "R_PWM8";
+        case AltFunc::CAN_TX0: return "CAN_TX0";
+        case AltFunc::CAN_RX0: return "CAN_RX0";
+        case AltFunc::R_CAN_TX0: return "R_CAN_TX0";
+        case AltFunc::R_I2S3_LRCK: return "R_I2S3_LRCK";
+        case AltFunc::R_I2S3_SCLK: return "R_I2S3_SCLK";
+        case AltFunc::GMAC1_TX: return "GMAC1_TX";
+        case AltFunc::GMAC1_TX_D0: return "GMAC1_TX_D0";
+        case AltFunc::GMAC1_TX_D2: return "GMAC1_TX_D2";
+        case AltFunc::GMAC1_TX_D3: return "GMAC1_TX_D3";
+        case AltFunc::GMAC1_RX_D0: return "GMAC1_RX_D0";
+        case AltFunc::GMAC1_RX_D1: return "GMAC1_RX_D1";
+        case AltFunc::GMAC1_RX_D2: return "GMAC1_RX_D2";
+        case AltFunc::GMAC1_RX_D3: return "GMAC1_RX_D3";
+        case AltFunc::GMAC1_RXDV: return "GMAC1_RXDV";
+        case AltFunc::GMAC1_RX_CLK: return "GMAC1_RX_CLK";
+        case AltFunc::GMAC1_CLK_REF: return "GMAC1_CLK_REF";
+        case AltFunc::PCIe0_PERSTN: return "PCIe0_PERSTN";
+        case AltFunc::PCIe0_WAKEN: return "PCIe0_WAKEN";
+        case AltFunc::PCIe0_CLKREQN: return "PCIe0_CLKREQN";
+        case AltFunc::PCIe1_PERSTN: return "PCIe1_PERSTN";
+        case AltFunc::PCIe1_WAKEN: return "PCIe1_WAKEN";
+        case AltFunc::PCIe1_CLKREQN: return "PCIe1_CLKREQN";
+        case AltFunc::PCIe2_PERSTN: return "PCIe2_PERSTN";
+        case AltFunc::PCIe2_WAKEN: return "PCIe2_WAKEN";
+        case AltFunc::PCIe2_CLKREQN: return "PCIe2_CLKREQN";
+        case AltFunc::PRI_TDI: return "PRI_TDI";
+        case AltFunc::PRI_TMS: return "PRI_TMS";
+        case AltFunc::PRI_TCK: return "PRI_TCK";
+        case AltFunc::PRI_TDO: return "PRI_TDO";
+        case AltFunc::MN_CLK: return "MN_CLK";
+        case AltFunc::MN_CLK2: return "MN_CLK2";
+        case AltFunc::VCXO_OUT: return "VCXO_OUT";
+        case AltFunc::DSI_TE: return "DSI_TE";
+        case AltFunc::_32K_OUT: return "32K_OUT";
+        case AltFunc::R_IR_RX: return "R_IR_RX";
+        case AltFunc::ONE_WIRE: return "ONE_WIRE";
+        case AltFunc::KP_MKOUT_2: return "KP_MKOUT_2";
+        case AltFunc::KP_MKOUT_3: return "KP_MKOUT_3";
+        case AltFunc::KP_MKIN_3: return "KP_MKIN_3";
+    }
+
+    return "UNKNOWN";
+}
+}
+
 class Raspberry
 {
 private:
@@ -227,14 +349,13 @@ void displayPins()
         std::cout << "│";
         printBcm(leftPin.getBcm());
         std::cout << "│";
-        printPinName(leftPin, false); // wyrównanie do prawej
+        printPinName(leftPin, false);
         std::cout << "│";
 
-        // Fizyczne ID na środku (pogrubione, ułatwia lokalizację)
         std::cout << BOLD << " " << std::setw(2) << std::setfill('0') << leftPin.getId() << " " << RESET << "│";
         std::cout << BOLD << " " << std::setw(2) << std::setfill('0') << rightPin.getId() << " " << RESET << "│";
 
-        printPinName(rightPin, true); // wyrównanie do lewej
+        printPinName(rightPin, true);
         std::cout << "│";
         printBcm(rightPin.getBcm());
         std::cout << "│";
@@ -247,10 +368,185 @@ void displayPins()
     }
     std::cout << BOT_BORDER;
 
-    // --- LEGENDA NA DOLE ---
     std::cout << " Legenda: " 
               << BG_5V << "  5V  " << RESET << " Power "
               << BG_3V3 << " 3.3V " << RESET << " Power "
               << BG_GND << " GND " << RESET << " Ground "
               << T_GREEN << "● GPIO" << RESET << " General Purpose I/O\n\n";
-}};
+}
+
+void changePull()
+{
+    int pinId;
+    std::cout << "Podaj ID pinu (1-40): ";
+
+    if (!(std::cin >> pinId) || pinId < 1 || pinId > 40)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny ID pinu. Wybierz numer od 1 do 40.\n";
+        return;
+    }
+
+    Pin& pin = pins[pinId - 1];
+    if (!pin.getIsProgrammable())
+    {
+        std::cout << "Pin " << pinId << " (" << pin.getName()
+                  << ") nie jest programowalny.\n";
+        return;
+    }
+
+    std::cout << "Aktualny pull: "
+              << (pin.getPull() == Pull::Up ? "UP" :
+                  pin.getPull() == Pull::Down ? "DOWN" : "NONE") << "\n"
+              << "1. UP\n2. DOWN\n3. NONE\nWybierz: ";
+
+    int choice;
+    if (!(std::cin >> choice) || choice < 1 || choice > 3)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny wybór.\n";
+        return;
+    }
+
+    pin.setPull(choice == 1 ? Pull::Up : choice == 2 ? Pull::Down : Pull::None);
+    std::cout << "Pull pinu został zmieniony.\n";
+}
+
+void togglePin()
+{
+    int pinId;
+    std::cout << "Podaj ID pinu (1-40): ";
+
+    if (!(std::cin >> pinId) || pinId < 1 || pinId > 40)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny ID pinu. Wybierz numer od 1 do 40.\n";
+        return;
+    }
+
+    Pin& pin = pins[pinId - 1];
+    if (!pin.getIsProgrammable())
+    {
+        std::cout << "Pin " << pinId << " (" << pin.getName()
+                  << ") nie jest programowalny.\n";
+        return;
+    }
+
+    std::cout << "Aktualny stan: "
+              << (pin.getValue() == Level::High ? "HIGH" :
+                  pin.getValue() == Level::Low ? "LOW" : "NONE") << "\n"
+              << "1. HIGH\n2. LOW\nWybierz: ";
+
+    int choice;
+    if (!(std::cin >> choice) || choice < 1 || choice > 2)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny wybór.\n";
+        return;
+    }
+
+    pin.setValue(choice == 1 ? Level::High : Level::Low);
+    std::cout << "Stan pinu został zmieniony.\n";
+}
+
+void changePinMode()
+{
+    int pinId;
+    std::cout << "Podaj ID pinu (1-40): ";
+
+    if (!(std::cin >> pinId) || pinId < 1 || pinId > 40)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny ID pinu. Wybierz numer od 1 do 40.\n";
+        return;
+    }
+
+    Pin& pin = pins[pinId - 1];
+    if (!pin.getIsProgrammable())
+    {
+        std::cout << "Pin " << pinId << " (" << pin.getName()
+                  << ") nie jest programowalny.\n";
+        return;
+    }
+
+    std::cout << "Aktualny tryb: "
+              << (pin.getDirection() == Direction::Input ? "INPUT" :
+                  pin.getDirection() == Direction::Output ? "OUTPUT" : "NONE") << "\n"
+              << "1. INPUT\n2. OUTPUT\nWybierz: ";
+
+    int choice;
+    if (!(std::cin >> choice) || choice < 1 || choice > 2)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny wybór.\n";
+        return;
+    }
+
+    pin.setDirection(choice == 1 ? Direction::Input : Direction::Output);
+    std::cout << "Tryb pinu został zmieniony.\n";
+}
+
+void selectAlternateFunction()
+{
+    int pinId;
+    std::cout << "Podaj ID pinu (1-40): ";
+
+    if (!(std::cin >> pinId) || pinId < 1 || pinId > 40)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Niepoprawny ID pinu. Wybierz numer od 1 do 40.\n";
+        return;
+    }
+
+    Pin& pin = pins[pinId - 1];
+    if (!pin.getIsProgrammable())
+    {
+        std::cout << "Pin " << pinId << " (" << pin.getName()
+                  << ") nie jest programowalny.\n";
+        return;
+    }
+
+    AltFunc* availableFunctions = Pin::getAltFunctions(pin.getId());
+    if (availableFunctions == nullptr)
+    {
+        std::cout << "Dla tego pinu nie ma dostępnych funkcji.\n";
+        return;
+    }
+
+    std::cout << "Aktualna funkcja: " << altFuncName(pin.getCurrentFunc()) << "\n";
+    std::cout << "Dostępne funkcje:\n";
+
+    int availableCount = 0;
+    for (int index = 0; index < 7 && availableFunctions[index] != AltFunc::NONE; ++index)
+    {
+        ++availableCount;
+        std::cout << availableCount << ". " << altFuncName(availableFunctions[index]) << "\n";
+    }
+
+    std::cout << "Wybierz funkcję: ";
+    int choice;
+    if (!(std::cin >> choice) || choice < 1 || choice > availableCount)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        delete[] availableFunctions;
+        std::cout << "Niepoprawny wybór.\n";
+        return;
+    }
+
+    AltFunc selectedFunction = availableFunctions[choice - 1];
+    bool changed = pin.setAltFunc(selectedFunction);
+    delete[] availableFunctions;
+
+    std::cout << (changed ? "Funkcja alternatywna została zmieniona.\n"
+                          : "Nie udało się zmienić funkcji alternatywnej.\n");
+}
+
+};
