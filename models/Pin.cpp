@@ -1,5 +1,8 @@
 #include "Pin.h"
-Pin::Pin(){}
+Pin::Pin(){
+
+    funkcjeAlt = nullptr;
+}
 Pin::Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, Direction state)
     : id(id),
       bcm(bcm),
@@ -11,6 +14,55 @@ Pin::Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, D
       value(value),
       state(state)
 {}
+
+
+Pin::Pin(const Pin& other)
+    : id(other.id),
+      bcm(other.bcm),
+      name(other.name),
+      isProgrammable(other.isProgrammable),
+      type(other.type),
+      pull(other.pull),
+      value(other.value),
+      state(other.state)
+{
+    if (other.funkcjeAlt != nullptr) {
+        funkcjeAlt = new AltFunc[7];
+        for (int i = 0; i < 7; ++i) {
+            funkcjeAlt[i] = other.funkcjeAlt[i];
+        }
+    } else {
+        funkcjeAlt = nullptr;
+    }
+}
+
+Pin& Pin::operator=(const Pin& other)
+{
+    if (this == &other)
+        return *this;
+    delete[] funkcjeAlt;
+    funkcjeAlt = nullptr;
+    id = other.id;
+    bcm = other.bcm;
+    name = other.name;
+    isProgrammable = other.isProgrammable;
+    type = other.type;
+    pull = other.pull;
+    value = other.value;
+    state = other.state;
+    if (other.funkcjeAlt != nullptr) {
+        funkcjeAlt = new AltFunc[7];
+        for (int i = 0; i < 7; ++i) {
+            funkcjeAlt[i] = other.funkcjeAlt[i];
+        }
+    }
+
+    return *this;
+}
+
+
+
+
 
 Pin::~Pin()
 {

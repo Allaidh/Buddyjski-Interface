@@ -42,6 +42,8 @@ private:
 
 public:
     Pin(); 
+    Pin(const Pin& other);
+    Pin& operator=(const Pin& other);
     Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, Direction state);
     ~Pin();
 
