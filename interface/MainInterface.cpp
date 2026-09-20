@@ -1,4 +1,4 @@
-#include "../models/Raspberry.h" // <-- WŁAŚCIWY INCLUDE (nagłówek .h zamiast .cpp!)
+#include "../models/Raspberry.h"
 
 #include <iostream>
 #include <limits>
@@ -109,7 +109,7 @@ int main()
     while (running)
     {
         clearScreen();
-        printHeader("4B");
+        printHeader(rpi.getModelName());
         printMainMenu();
 
         int choice = readChoice();
@@ -122,7 +122,7 @@ int main()
 
             case 1:
                 clearScreen();
-                printHeader("4B", "Pokaz pinout");
+                printHeader(rpi.getModelName(), "Pokaz pinout");
                 printSectionTitle("[*] PINOUT PLYTKI");
                 rpi.displayPins();
                 pauseScreen();
@@ -130,7 +130,7 @@ int main()
 
             case 2:
                 clearScreen();
-                printHeader("4B", "Zmien PULL");
+                printHeader(rpi.getModelName(), "Zmien PULL");
                 printSectionTitle("[~] USTAWIENIA REZYSTORA PULL");
                 rpi.changePull();
                 pauseScreen();
@@ -138,7 +138,7 @@ int main()
 
             case 3:
                 clearScreen();
-                printHeader("4B", "Przelacz pin");
+                printHeader(rpi.getModelName(), "Przelacz pin");
                 printSectionTitle("[!] PRZELACZANIE STANU PINU");
                 rpi.togglePin();
                 pauseScreen();
@@ -146,7 +146,7 @@ int main()
 
             case 4:
                 clearScreen();
-                printHeader("4B", "Zmien tryb pinu");
+                printHeader(rpi.getModelName(), "Zmien tryb pinu");
                 printSectionTitle("[<>] ZMIANA KIERUNKU PINU");
                 rpi.changePinMode();
                 pauseScreen();
@@ -154,7 +154,7 @@ int main()
 
             case 5:
                 clearScreen();
-                printHeader("4B", "Funkcja alternatywna");
+                printHeader(rpi.getModelName(), "Funkcja alternatywna");
                 printSectionTitle("[+] FUNKCJE ALTERNATYWNE (ALT)");
                 rpi.selectAlternateFunction();
                 pauseScreen();

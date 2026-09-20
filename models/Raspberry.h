@@ -9,7 +9,6 @@
 #include <limits>
 #include <algorithm>
 
-// Deklaracja funkcji pomocniczej
 std::string altFuncToString(AltFunc func);
 namespace UI
 {
