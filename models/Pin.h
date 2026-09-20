@@ -58,4 +58,7 @@ public:
     Pull getPull() const;
     Level getValue() const;
     Direction getDirection() const;
+    void setPull(Pull _pull);
+    void setValue(Level _level);
+    void setDirection(Direction _direction);
 };

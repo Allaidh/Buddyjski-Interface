@@ -351,3 +351,15 @@ Direction Pin::getDirection() const
 {
     return state;
 }
+void Pin::setPull(Pull _pull)
+{
+    pull = _pull;
+}
+void Pin::setValue(Level _level)
+{
+    value = _level;
+}
+void Pin::setDirection(Direction _state)
+{
+    state = _state;
+}
