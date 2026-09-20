@@ -42,6 +42,7 @@ private:
     Direction state;
 
 public:
+    Pin(); 
     Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, Direction state);
     ~Pin();
 

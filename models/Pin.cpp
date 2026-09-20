@@ -1,5 +1,5 @@
 #include "Pin.h"
-
+Pin::Pin(){}
 Pin::Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, Direction state)
     : id(id),
       bcm(bcm),

@@ -1,10 +1,13 @@
 CXX := g++
+
 CXXFLAGS := -Wall -Wextra -std=c++17
 
 TARGET := program
 
-SRC_DIRS := source models
+SRC_DIRS := interface models
+
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
+
 OBJS := $(SRCS:.cpp=.o)
 
 all: $(TARGET)
