@@ -1,4 +1,5 @@
 enum class AltFunc {
+    NONE = 0,
     GPIO,
 
     I2C4_SDA, I2C4_SCL,

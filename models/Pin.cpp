@@ -1,15 +1,14 @@
 #include "Pin.h"
-Pin::Pin(){
+Pin::Pin() : funkcjeAlt(nullptr), currentFunc(AltFunc::NONE) {}
 
-    funkcjeAlt = nullptr;
-}
 Pin::Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, Direction state)
     : id(id),
       bcm(bcm),
       name(name),
-    isProgrammable(type == Type::GPIO),
+      isProgrammable(type == Type::GPIO),
       type(type),
-    funkcjeAlt(type == Type::GPIO ? getAltFunctions(id) : nullptr),
+      funkcjeAlt(type == Type::GPIO ? getAltFunctions(id) : nullptr),
+      currentFunc(type == Type::GPIO ? AltFunc::GPIO : AltFunc::NONE), 
       pull(pull),
       value(value),
       state(state)
@@ -22,6 +21,7 @@ Pin::Pin(const Pin& other)
       name(other.name),
       isProgrammable(other.isProgrammable),
       type(other.type),
+      currentFunc(other.currentFunc),
       pull(other.pull),
       value(other.value),
       state(other.state)
@@ -47,6 +47,7 @@ Pin& Pin::operator=(const Pin& other)
     name = other.name;
     isProgrammable = other.isProgrammable;
     type = other.type;
+    currentFunc = other.currentFunc;
     pull = other.pull;
     value = other.value;
     state = other.state;
@@ -74,7 +75,7 @@ Pin::~Pin()
 
 AltFunc* Pin::getAltFunctions(unsigned short id)
 {
-    AltFunc* funkcjeAlt = new AltFunc[7];
+    AltFunc* funkcjeAlt = new AltFunc[7] {AltFunc::NONE };
         
         switch(id){
             case 3:
@@ -362,4 +363,32 @@ void Pin::setValue(Level _level)
 void Pin::setDirection(Direction _state)
 {
     state = _state;
+}
+
+
+AltFunc Pin::getCurrentFunc() const
+{
+    return currentFunc;
+}
+
+bool Pin::setAltFunc(AltFunc newFunc)
+{
+    if (!isProgrammable || funkcjeAlt == nullptr) {
+        return false; 
+    }
+    for (int i = 0; i < 7; i++)
+    {
+        if (funkcjeAlt[i] == newFunc)
+        {
+            currentFunc = newFunc;
+            if (newFunc != AltFunc::GPIO) {
+                state = Direction::None; 
+            } else {
+                state = Direction::Input; 
+            }
+
+            return true; 
+        }
+    }
+    return false; 
 }

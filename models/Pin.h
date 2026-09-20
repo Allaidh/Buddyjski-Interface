@@ -36,6 +36,7 @@ private:
     bool isProgrammable;
     Type type;
     AltFunc* funkcjeAlt;
+    AltFunc currentFunc;
     Pull pull;
     Level value;
     Direction state;
@@ -58,6 +59,8 @@ public:
     Pull getPull() const;
     Level getValue() const;
     Direction getDirection() const;
+    AltFunc getCurrentFunc() const;
+    bool setAltFunc(AltFunc newFunc);
     void setPull(Pull _pull);
     void setValue(Level _level);
     void setDirection(Direction _direction);
