@@ -1,4 +1,3 @@
-id	bcm	name	type	pull	value	state
 1	null	3V3	VCC_3V3	none	none	none
 2	null	5V	VCC_5V	none	none	none
 3	2	GPIO2	GPIO	up	high	input

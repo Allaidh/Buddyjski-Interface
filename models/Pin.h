@@ -4,8 +4,7 @@
 
 #include "AltFunc.h"
 #include "Type.h"
-
-#define usi unsigned short int
+using usi = unsigned short int;
 
 enum class Pull
 {
@@ -47,4 +46,14 @@ public:
     ~Pin();
 
     static AltFunc* getAltFunctions(unsigned short id);
+
+
+    usi getId() const;
+    usi getBcm() const;
+    std::string getName() const;
+    bool getIsProgrammable() const;
+    Type getType() const;
+    Pull getPull() const;
+    Level getValue() const;
+    Direction getDirection() const;
 };

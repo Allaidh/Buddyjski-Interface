@@ -260,3 +260,42 @@ AltFunc* Pin::getAltFunctions(unsigned short id)
         
     return funkcjeAlt;
 }
+usi Pin::getId() const
+{
+    return id;
+}
+
+usi Pin::getBcm() const
+{
+    return bcm;
+}
+
+std::string Pin::getName() const
+{
+    return name;
+}
+
+bool Pin::getIsProgrammable() const
+{
+    return isProgrammable;
+}
+
+Type Pin::getType() const
+{
+    return type;
+}
+
+Pull Pin::getPull() const
+{
+    return pull;
+}
+
+Level Pin::getValue() const
+{
+    return value;
+}
+
+Direction Pin::getDirection() const
+{
+    return state;
+}
