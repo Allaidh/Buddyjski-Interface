@@ -117,4 +117,5 @@ public:
     void togglePin();
     void changePinMode();
     void selectAlternateFunction();
+    std::string getModelName();
 };

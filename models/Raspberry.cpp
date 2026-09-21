@@ -166,6 +166,10 @@ Raspberry::Raspberry(std::string name)
     file.close();
 }
 
+std::string Raspberry::getModelName() {
+    return name;
+}
+
 Pull Raspberry::parsePull(std::string text)
 {
     if (text == "up")   return Pull::Up;
@@ -197,112 +201,124 @@ Type Raspberry::parseType(std::string text)
 
 void Raspberry::displayPins()
 {
-    auto printMode = [&](Direction dir) {
-        if (dir == Direction::Input)       std::cout << UI::CYAN   << " INPUT" << UI::RESET;
-        else if (dir == Direction::Output) std::cout << UI::YELLOW << "OUTPUT" << UI::RESET;
-        else                               std::cout << UI::GRAY   << "  --  " << UI::RESET;
-    };
+    std::cout << "\n";
+    std::cout << "=============================================================== PINOUT ===============================================================\n";
 
-    auto printLevel = [&](Level lvl) {
-        if (lvl == Level::High)      std::cout << UI::GREEN << " HIGH " << UI::RESET;
-        else if (lvl == Level::Low)  std::cout << UI::RED   << " LOW  " << UI::RESET;
-        else                         std::cout << UI::GRAY  << "  --  " << UI::RESET;
-    };
+    std::cout << std::left
+              << std::setw(6)  << "PIN"
+              << std::setw(6)  << "BCM"
+              << std::setw(9)  << "MODE"
+              << std::setw(8)  << "LEVEL"
+              << std::setw(8)  << "PULL"
+              << std::setw(18) << "ACTIVE ROLE"
+              << "    "
+              << std::setw(6)  << "PIN"
+              << std::setw(6)  << "BCM"
+              << std::setw(9)  << "MODE"
+              << std::setw(8)  << "LEVEL"
+              << std::setw(8)  << "PULL"
+              << "ACTIVE ROLE"
+              << "\n";
 
-    auto printPull = [&](Pull pull) {
-        if (pull == Pull::Up)         std::cout << UI::BLUE    << "  UP  " << UI::RESET;
-        else if (pull == Pull::Down)  std::cout << UI::MAGENTA << " DOWN " << UI::RESET;
-        else                          std::cout << UI::GRAY    << "  --  " << UI::RESET;
-    };
+    std::cout << "------------------------------------------------------------------------------------------------------------------------------------\n";
 
-    auto printBcm = [&](int bcm) {
-        if (bcm <= 0) std::cout << UI::GRAY << " -- " << UI::RESET;
-        else          std::cout << " " << std::setw(2) << std::setfill(' ') << bcm << " ";
-    };
-
-    auto printPinName = [&](const Pin& pin, bool leftAlign) {
-        std::string displayName;
-        bool isAltActive = false;
-
-        if (pin.getType() == Type::GPIO) 
-        {
-            AltFunc current = pin.getCurrentFunc();
-            if (current != AltFunc::GPIO && current != AltFunc::NONE)
-            {
-                displayName = altFuncToString(current);
-                isAltActive = true;
-            }
-            else 
-                displayName = pin.getName();
-        }
-        else 
-            displayName = pin.getName();
-
-        if (displayName.length() > 16) 
-            displayName = displayName.substr(0, 13) + "...";
-
-        int pad = 16 - displayName.length();
-        std::string padded = leftAlign ? (displayName + std::string(pad, ' ')) 
-                                       : (std::string(pad, ' ') + displayName);
-
-        if (isAltActive)
-            std::cout << UI::BG_ALT << padded << UI::RESET;
-        else
-        {
-            switch (pin.getType())
-            {
-                case Type::VCC_5V:   std::cout << UI::BG_5V << padded << UI::RESET; break;
-                case Type::VCC_3V3:  std::cout << UI::BG_3V3 << padded << UI::RESET; break;
-                case Type::Ground:   std::cout << UI::BG_GND << padded << UI::RESET; break;
-                case Type::GPIO:     std::cout << UI::GREEN << padded << UI::RESET; break;
-                default:             std::cout << UI::GRAY << padded << UI::RESET; break;
-            }
-        }
-    };
-
-    std::cout << "\n" << UI::BOLD << UI::CYAN;
-    std::cout << " +" << std::string(94, '=') << "+\n";
-    
-    std::string title = name + " - PHYSICAL PINOUT MAP";
-    int titlePad = (94 - title.length()) / 2;
-    std::cout << " |" << std::string(titlePad, ' ') << title 
-              << std::string(94 - titlePad - title.length(), ' ') << "|\n";
-    std::cout << " +" << std::string(94, '=') << "+\n" << UI::RESET;
-
-    const std::string TOP = " +------+------+------+----+----------------+----+----+----------------+----+------+------+------+\n";
-    const std::string MID = " +------+------+------+----+----------------+----+----+----------------+----+------+------+------+\n";
-
-    std::cout << TOP;
-    std::cout << " | MODE | LVL  | PULL |BCM |  ACTIVE  ROLE  | ID | ID |  ACTIVE  ROLE  |BCM | PULL | LVL  | MODE |\n";
-    std::cout << MID;
-
-    for (int r = 0; r < 20; r++)
+    for (int i = 0; i < 20; i++)
     {
-        Pin& leftPin  = pins[2 * r];
-        Pin& rightPin = pins[2 * r + 1];
+        Pin& left = pins[i * 2];
+        Pin& right = pins[i * 2 + 1];
 
-        std::cout << " |"; printMode(leftPin.getDirection());
-        std::cout << "|";  printLevel(leftPin.getValue());
-        std::cout << "|";  printPull(leftPin.getPull());
-        std::cout << "|";  printBcm(leftPin.getBcm());
-        std::cout << "|";  printPinName(leftPin, false);
-        std::cout << "|" << UI::BOLD << " " << std::setw(2) << std::setfill('0') << leftPin.getId() << " " << UI::RESET;
-        std::cout << "|" << UI::BOLD << " " << std::setw(2) << std::setfill('0') << rightPin.getId() << " " << UI::RESET;
-        std::cout << "|"; printPinName(rightPin, true);
-        std::cout << "|"; printBcm(rightPin.getBcm());
-        std::cout << "|"; printPull(rightPin.getPull());
-        std::cout << "|"; printLevel(rightPin.getValue());
-        std::cout << "|"; printMode(rightPin.getDirection());
-        std::cout << "|\n";
+        std::string leftMode;
+        if (left.getDirection() == Direction::Input)
+            leftMode = "INPUT";
+        else if (left.getDirection() == Direction::Output)
+            leftMode = "OUTPUT";
+        else
+            leftMode = "--";
+
+        std::string leftLevel;
+        if (left.getValue() == Level::High)
+            leftLevel = "HIGH";
+        else if (left.getValue() == Level::Low)
+            leftLevel = "LOW";
+        else
+            leftLevel = "--";
+
+        std::string leftPull;
+        if (left.getPull() == Pull::Up)
+            leftPull = "UP";
+        else if (left.getPull() == Pull::Down)
+            leftPull = "DOWN";
+        else
+            leftPull = "--";
+
+
+        std::string rightMode;
+        if (right.getDirection() == Direction::Input)
+            rightMode = "INPUT";
+        else if (right.getDirection() == Direction::Output)
+            rightMode = "OUTPUT";
+        else
+            rightMode = "--";
+
+        std::string rightLevel;
+        if (right.getValue() == Level::High)
+            rightLevel = "HIGH";
+        else if (right.getValue() == Level::Low)
+            rightLevel = "LOW";
+        else
+            rightLevel = "--";
+
+        std::string rightPull;
+        if (right.getPull() == Pull::Up)
+            rightPull = "UP";
+        else if (right.getPull() == Pull::Down)
+            rightPull = "DOWN";
+        else
+            rightPull = "--";
+
+
+        std::string leftRole = left.getName();
+
+        if (left.getType() == Type::GPIO)
+        {
+            AltFunc alt = left.getCurrentFunc();
+
+            if (alt != AltFunc::GPIO && alt != AltFunc::NONE)
+                leftRole = altFuncToString(alt);
+        }
+
+        std::string rightRole = right.getName();
+
+        if (right.getType() == Type::GPIO)
+        {
+            AltFunc alt = right.getCurrentFunc();
+
+            if (alt != AltFunc::GPIO && alt != AltFunc::NONE)
+                rightRole = altFuncToString(alt);
+        }
+
+
+        std::cout << std::left
+                  << std::setw(6)  << left.getId()
+                  << std::setw(6)  << left.getBcm()
+                  << std::setw(9)  << leftMode
+                  << std::setw(8)  << leftLevel
+                  << std::setw(8)  << leftPull
+                  << std::setw(18) << leftRole
+
+                  << "    "
+
+                  << std::setw(6)  << right.getId()
+                  << std::setw(6)  << right.getBcm()
+                  << std::setw(9)  << rightMode
+                  << std::setw(8)  << rightLevel
+                  << std::setw(8)  << rightPull
+                  << rightRole
+
+                  << "\n";
     }
-    std::cout << MID;
 
-    std::cout << "\n  Legenda: " 
-              << UI::BG_5V << "  5V  " << UI::RESET << " Power   "
-              << UI::BG_3V3 << " 3.3V " << UI::RESET << " Power   "
-              << UI::BG_GND << " GND " << UI::RESET << " Ground   "
-              << UI::GREEN << "* GPIO" << UI::RESET << " GPIO Mode   "
-              << UI::BG_ALT << " ACTIVE ALT " << UI::RESET << " Active Alt\n";
+    std::cout << "====================================================================================================================================\n";
 }
 
 void Raspberry::changePull()
