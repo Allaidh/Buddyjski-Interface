@@ -4,7 +4,7 @@
 
 #include "AltFunc.h"
 #include "Type.h"
-using usi = unsigned short int;
+using usi = short int;
 
 enum class Pull
 {

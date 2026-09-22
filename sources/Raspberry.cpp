@@ -256,19 +256,6 @@ Type Raspberry::parseType(std::string text)
 
 void Raspberry::displayPins()
 {
-    auto getActiveRole = [](const Pin& pin)
-    {
-        switch (pin.getType())
-        {
-            case Type::Ground: return std::string("GND");
-            case Type::VCC_3V3: return std::string("3V3");
-            case Type::VCC_5V:  return std::string("5V");
-            case Type::GPIO:    return altFuncToString(pin.getCurrentFunc());
-        }
-
-        return std::string("UNKNOWN");
-    };
-
     std::cout << "\n";
     std::cout << "=============================================================== PINOUT ===============================================================\n";
 
@@ -345,13 +332,33 @@ void Raspberry::displayPins()
             rightPull = "--";
 
 
-        std::string leftRole = getActiveRole(left);
-        std::string rightRole = getActiveRole(right);
+        std::string leftRole = left.getName();
 
+        if (left.getType() == Type::GPIO)
+        {
+            AltFunc alt = left.getCurrentFunc();
+
+            if (alt != AltFunc::GPIO && alt != AltFunc::NONE)
+                leftRole = altFuncToString(alt);
+        }
+
+        std::string rightRole = right.getName();
+
+        if (right.getType() == Type::GPIO)
+        {
+            AltFunc alt = right.getCurrentFunc();
+
+            if (alt != AltFunc::GPIO && alt != AltFunc::NONE)
+                rightRole = altFuncToString(alt);
+        }
+
+        std::string leftId = left.getBcm() == -1 ? "--" : std::to_string(left.getBcm());
+        
+        std::string rightId = right.getBcm() == -1 ? "--" : std::to_string(right.getBcm());
 
         std::cout << std::left
                   << std::setw(6)  << left.getId()
-                  << std::setw(6)  << left.getBcm()
+                  << std::setw(6)  << leftId
                   << std::setw(9)  << leftMode
                   << std::setw(8)  << leftLevel
                   << std::setw(8)  << leftPull
@@ -360,7 +367,7 @@ void Raspberry::displayPins()
                   << "    "
 
                   << std::setw(6)  << right.getId()
-                  << std::setw(6)  << right.getBcm()
+                  << std::setw(6)  << rightId
                   << std::setw(9)  << rightMode
                   << std::setw(8)  << rightLevel
                   << std::setw(8)  << rightPull
