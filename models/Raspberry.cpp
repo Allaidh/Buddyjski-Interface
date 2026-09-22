@@ -186,6 +186,10 @@ Level Raspberry::parseLevel(std::string text)
 
 Direction Raspberry::parseDirection(std::string text)
 {
+    if (!text.empty() && text.back() == '\r'){ //Dodane ze względu na to, że nowa linia w pliku txt jest odczytywana jako \r dlatego nie przypisywał popranej wartości
+        text.pop_back();
+    }
+
     if (text == "input")  return Direction::Input;
     if (text == "output") return Direction::Output;
     return Direction::None;
