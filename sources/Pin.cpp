@@ -1,4 +1,5 @@
-#include "Pin.h"
+#include "../models/Pin.h"
+
 Pin::Pin() : funkcjeAlt(nullptr), currentFunc(AltFunc::NONE) {}
 
 Pin::Pin(usi id, usi bcm, std::string name, Type type, Pull pull, Level value, Direction state)
