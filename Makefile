@@ -4,7 +4,7 @@ CXXFLAGS := -Wall -Wextra -std=c++17
 
 TARGET := program
 
-SRC_DIRS := interface models
+SRC_DIRS := interface models sources
 
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
 
