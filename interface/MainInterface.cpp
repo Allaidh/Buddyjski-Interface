@@ -14,7 +14,7 @@ void pauseScreen()
 	std::cout << "\n" << UI::DIM << UI::GRAY << "Nacisnij " << UI::RESET
          << UI::CYAN << "[ENTER]" << UI::RESET
          << UI::DIM << UI::GRAY << ", aby wrocic do menu..." << UI::RESET;
-	sin::cin.get();
+	std::cin.get();
 }
 
 void printHeader()

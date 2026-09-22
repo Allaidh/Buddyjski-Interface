@@ -256,6 +256,19 @@ Type Raspberry::parseType(std::string text)
 
 void Raspberry::displayPins()
 {
+    auto getActiveRole = [](const Pin& pin)
+    {
+        switch (pin.getType())
+        {
+            case Type::Ground: return std::string("GND");
+            case Type::VCC_3V3: return std::string("3V3");
+            case Type::VCC_5V:  return std::string("5V");
+            case Type::GPIO:    return altFuncToString(pin.getCurrentFunc());
+        }
+
+        return std::string("UNKNOWN");
+    };
+
     std::cout << "\n";
     std::cout << "=============================================================== PINOUT ===============================================================\n";
 
@@ -332,25 +345,8 @@ void Raspberry::displayPins()
             rightPull = "--";
 
 
-        std::string leftRole = left.getName();
-
-        if (left.getType() == Type::GPIO)
-        {
-            AltFunc alt = left.getCurrentFunc();
-
-            if (alt != AltFunc::GPIO && alt != AltFunc::NONE)
-                leftRole = altFuncToString(alt);
-        }
-
-        std::string rightRole = right.getName();
-
-        if (right.getType() == Type::GPIO)
-        {
-            AltFunc alt = right.getCurrentFunc();
-
-            if (alt != AltFunc::GPIO && alt != AltFunc::NONE)
-                rightRole = altFuncToString(alt);
-        }
+        std::string leftRole = getActiveRole(left);
+        std::string rightRole = getActiveRole(right);
 
 
         std::cout << std::left
