@@ -65,6 +65,7 @@ Pin& Pin::operator=(const Pin& other)
 
 
 
+
 Pin::~Pin()
 {
     if(funkcjeAlt != nullptr){
@@ -80,232 +81,284 @@ AltFunc* Pin::getAltFunctions(unsigned short id)
         switch(id){
             case 3:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::R_SPI_RXD;
-                funkcjeAlt[2] = AltFunc::R_UART1_RXD;
-                funkcjeAlt[3] = AltFunc::R_PWM7;
-                funkcjeAlt[4] = AltFunc::I2C4_SDA;
+                funkcjeAlt[1] = AltFunc::SDA1;
+                funkcjeAlt[2] = AltFunc::SA3;
+                funkcjeAlt[3] = AltFunc::LCD_VSYNC;
+                funkcjeAlt[4] = AltFunc::SPI3_MOSI;
+                funkcjeAlt[5] = AltFunc::CTS2;
+                funkcjeAlt[6] = AltFunc::SDA3;
                 break;
-                
+
             case 5:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::R_SPI_TXD;
-                funkcjeAlt[2] = AltFunc::R_UART1_TXD;
-                funkcjeAlt[3] = AltFunc::R_PWM6;
-                funkcjeAlt[4] = AltFunc::I2C4_SCL;
+                funkcjeAlt[1] = AltFunc::SCL1;
+                funkcjeAlt[2] = AltFunc::SA2;
+                funkcjeAlt[3] = AltFunc::LCD_HSYNC;
+                funkcjeAlt[4] = AltFunc::SPI3_SCLK;
+                funkcjeAlt[5] = AltFunc::RTS2;
+                funkcjeAlt[6] = AltFunc::SCL3;
                 break;
-                
+
             case 7:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::UART5_TXD;
-                funkcjeAlt[2] = AltFunc::DCLK_SPI_LCD;
-                funkcjeAlt[3] = AltFunc::AP_I2C2_SCL;
-                funkcjeAlt[4] = AltFunc::PRI_TDI;
+                funkcjeAlt[1] = AltFunc::GPCLK0;
+                funkcjeAlt[2] = AltFunc::SA1;
+                funkcjeAlt[3] = AltFunc::DPI_D0;
+                funkcjeAlt[4] = AltFunc::SPI4_CE0_N;
+                funkcjeAlt[5] = AltFunc::TXD3;
+                funkcjeAlt[6] = AltFunc::SDA3;
                 break;
-                
+
             case 8:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::R_UART0_TXD;
-                funkcjeAlt[2] = AltFunc::R_CAN_TX0;
-                funkcjeAlt[3] = AltFunc::R_PWM8;
-                funkcjeAlt[4] = AltFunc::AP_I2C3_SCL;
-                funkcjeAlt[5] = AltFunc::ONE_WIRE;
+                funkcjeAlt[1] = AltFunc::TXD0;
+                funkcjeAlt[2] = AltFunc::SD6;
+                funkcjeAlt[3] = AltFunc::DPI_D10;
+                funkcjeAlt[4] = AltFunc::SPI5_MOSI;
+                funkcjeAlt[5] = AltFunc::CTS5;
+                funkcjeAlt[6] = AltFunc::TXD1;
                 break;
-                
+
             case 10:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::R_UART0_TXD;
-                funkcjeAlt[2] = AltFunc::R_CAN_TX0;
-                funkcjeAlt[3] = AltFunc::R_IR_RX;
-                funkcjeAlt[4] = AltFunc::AP_I2C3_SDA;
-                funkcjeAlt[5] = AltFunc::KP_MKOUT_2;
+                funkcjeAlt[1] = AltFunc::RXD0;
+                funkcjeAlt[2] = AltFunc::SD7;
+                funkcjeAlt[3] = AltFunc::DPI_D11;
+                funkcjeAlt[4] = AltFunc::SPI5_SCLK;
+                funkcjeAlt[5] = AltFunc::RTS5;
+                funkcjeAlt[6] = AltFunc::RXD1;
                 break;
-                
+
             case 11:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::UART5_RXD;
-                funkcjeAlt[2] = AltFunc::DCX_DOUT1_SPI_LCD;
-                funkcjeAlt[3] = AltFunc::AP_I2C2_SDA;
-                funkcjeAlt[4] = AltFunc::PRI_TMS;
+                funkcjeAlt[1] = AltFunc::FL1;
+                funkcjeAlt[2] = AltFunc::SD9;
+                funkcjeAlt[3] = AltFunc::DPI_D13;
+                funkcjeAlt[4] = AltFunc::RTS0;
+                funkcjeAlt[5] = AltFunc::SPI1_CE1_N;
+                funkcjeAlt[6] = AltFunc::RTS1;
                 break;
-                
+
             case 12:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::PWM9;
-                funkcjeAlt[2] = AltFunc::CS_SPI_LCD;
-                funkcjeAlt[3] = AltFunc::PCIe2_WAKEN;
+                funkcjeAlt[1] = AltFunc::PCM_CLK;
+                funkcjeAlt[2] = AltFunc::SD10;
+                funkcjeAlt[3] = AltFunc::DPI_D14;
+                funkcjeAlt[4] = AltFunc::SPI6_CE0_N;
+                funkcjeAlt[5] = AltFunc::SPI1_CE0_N;
+                funkcjeAlt[6] = AltFunc::PWM0;
                 break;
-                
+
             case 13:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::UART5_CTS_N;
-                funkcjeAlt[2] = AltFunc::DIN_SPI_LCD;
-                funkcjeAlt[3] = AltFunc::UART9_TXD;
-                funkcjeAlt[4] = AltFunc::PRI_TCK;
+                funkcjeAlt[1] = AltFunc::SD0_DAT3;
+                funkcjeAlt[2] = AltFunc::TE1;
+                funkcjeAlt[3] = AltFunc::DPI_D23;
+                funkcjeAlt[4] = AltFunc::SD1_DAT3;
+                funkcjeAlt[5] = AltFunc::ARM_TMS;
+                funkcjeAlt[6] = AltFunc::SPI6_CE1_N;
                 break;
-                
+
             case 15:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::UART5_RTS_N;
-                funkcjeAlt[2] = AltFunc::DOUT0_SPI_LCD;
-                funkcjeAlt[3] = AltFunc::UART9_RXD;
-                funkcjeAlt[4] = AltFunc::PRI_TDO;
+                funkcjeAlt[1] = AltFunc::SD0_CLK;
+                funkcjeAlt[2] = AltFunc::SD14;
+                funkcjeAlt[3] = AltFunc::DPI_D18;
+                funkcjeAlt[4] = AltFunc::SD1_CLK;
+                funkcjeAlt[5] = AltFunc::ARM_TRST;
+                funkcjeAlt[6] = AltFunc::SDA6;
                 break;
-                
+
             case 16:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::MN_CLK2;
-                funkcjeAlt[2] = AltFunc::VCXO_OUT;
-                funkcjeAlt[3] = AltFunc::DSI_TE;
-                funkcjeAlt[4] = AltFunc::R_I2C0_SCL;
+                funkcjeAlt[1] = AltFunc::SD0_CMD;
+                funkcjeAlt[2] = AltFunc::SD15;
+                funkcjeAlt[3] = AltFunc::DPI_D19;
+                funkcjeAlt[4] = AltFunc::SD1_CMD;
+                funkcjeAlt[5] = AltFunc::ARM_RTCK;
+                funkcjeAlt[6] = AltFunc::SCL6;
                 break;
-                
+
             case 18:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::MN_CLK;
-                funkcjeAlt[2] = AltFunc::PWM7;
-                funkcjeAlt[3] = AltFunc::R_I2C0_SDA;
+                funkcjeAlt[1] = AltFunc::SD0_DAT0;
+                funkcjeAlt[2] = AltFunc::SD16;
+                funkcjeAlt[3] = AltFunc::DPI_D20;
+                funkcjeAlt[4] = AltFunc::SD1_DAT0;
+                funkcjeAlt[5] = AltFunc::ARM_TDO;
+                funkcjeAlt[6] = AltFunc::SPI3_CE1_N;
                 break;
-                
+
             case 19:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::SPI2_TXD;
-                funkcjeAlt[2] = AltFunc::SPI3_TXD;
-                funkcjeAlt[3] = AltFunc::AP_I2C3_SCL;
-                funkcjeAlt[4] = AltFunc::UART8_CTSN;
-                funkcjeAlt[5] = AltFunc::R_PWM0;
-                funkcjeAlt[6] = AltFunc::KP_MKOUT_2;
+                funkcjeAlt[1] = AltFunc::SPI0_MOSI;
+                funkcjeAlt[2] = AltFunc::SD2;
+                funkcjeAlt[3] = AltFunc::DPI_D6;
+                funkcjeAlt[4] = AltFunc::I2CSL_SDA;
+                funkcjeAlt[5] = AltFunc::CTS4;
+                funkcjeAlt[6] = AltFunc::SDA5;
                 break;
-                
+
             case 21:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::SPI2_RXD;
-                funkcjeAlt[2] = AltFunc::SPI3_RXD;
-                funkcjeAlt[3] = AltFunc::AP_I2C3_SDA;
-                funkcjeAlt[4] = AltFunc::UART8_RTS_N;
-                funkcjeAlt[5] = AltFunc::R_PWM1;
-                funkcjeAlt[6] = AltFunc::KP_MKIN_3;
+                funkcjeAlt[1] = AltFunc::SPI0_MISO;
+                funkcjeAlt[2] = AltFunc::SD1;
+                funkcjeAlt[3] = AltFunc::DPI_D5;
+                funkcjeAlt[4] = AltFunc::I2CSL_SDI;
+                funkcjeAlt[5] = AltFunc::RXD4;
+                funkcjeAlt[6] = AltFunc::SCL4;
                 break;
-                
+
             case 22:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::R_SPI_SCLK;
-                funkcjeAlt[2] = AltFunc::R_UART1_CTS_N;
-                funkcjeAlt[3] = AltFunc::R_PWM4;
-                funkcjeAlt[4] = AltFunc::R_I2C0_SCL;
-                funkcjeAlt[5] = AltFunc::KP_MKIN_3;
+                funkcjeAlt[1] = AltFunc::SD0_DAT1;
+                funkcjeAlt[2] = AltFunc::SD17;
+                funkcjeAlt[3] = AltFunc::DPI_D21;
+                funkcjeAlt[4] = AltFunc::SD1_DAT1;
+                funkcjeAlt[5] = AltFunc::ARM_TCK;
+                funkcjeAlt[6] = AltFunc::SPI4_CE1_N;
                 break;
-                
+
             case 23:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::SPI2_SCLK;
-                funkcjeAlt[2] = AltFunc::SPI3_SCLK;
-                funkcjeAlt[3] = AltFunc::CAN_TX0;
-                funkcjeAlt[4] = AltFunc::UART8_TXD;
-                funkcjeAlt[5] = AltFunc::AP_I2C4_SCL;
+                funkcjeAlt[1] = AltFunc::SPI0_SCLK;
+                funkcjeAlt[2] = AltFunc::SD3;
+                funkcjeAlt[3] = AltFunc::DPI_D7;
+                funkcjeAlt[4] = AltFunc::I2CSL_SCL;
+                funkcjeAlt[5] = AltFunc::RTS4;
+                funkcjeAlt[6] = AltFunc::SCL5;
                 break;
-                
+
             case 24:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::SPI2_FRM;
-                funkcjeAlt[2] = AltFunc::SPI3_FRM;
-                funkcjeAlt[3] = AltFunc::CAN_RX0;
-                funkcjeAlt[4] = AltFunc::UART8_RXD;
-                funkcjeAlt[5] = AltFunc::AP_I2C4_SDA;
+                funkcjeAlt[1] = AltFunc::SPI0_CE0_N;
+                funkcjeAlt[2] = AltFunc::SD0;
+                funkcjeAlt[3] = AltFunc::DPI_D4;
+                funkcjeAlt[4] = AltFunc::I2CSL_CE_N;
+                funkcjeAlt[5] = AltFunc::TXD4;
+                funkcjeAlt[6] = AltFunc::SDA4;
                 break;
-                
+
             case 26:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::R_SPI_FRM;
-                funkcjeAlt[2] = AltFunc::R_UART1_RTS_N;
-                funkcjeAlt[3] = AltFunc::R_PWM5;
-                funkcjeAlt[4] = AltFunc::R_I2C0_SDA;
-                funkcjeAlt[5] = AltFunc::KP_MKOUT_3;
+                funkcjeAlt[1] = AltFunc::SPI0_CE1_N;
+                funkcjeAlt[2] = AltFunc::SWE_N;
+                funkcjeAlt[3] = AltFunc::DPI_D3;
+                funkcjeAlt[4] = AltFunc::SPI4_SCLK;
+                funkcjeAlt[5] = AltFunc::RTS3;
+                funkcjeAlt[6] = AltFunc::SCL4;
                 break;
-                
+
             case 27:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_TX_D3;
-                funkcjeAlt[2] = AltFunc::I2C3_SDA;
-                funkcjeAlt[3] = AltFunc::R_I2S3_LRCK;
-                funkcjeAlt[4] = AltFunc::PWM9;
+                funkcjeAlt[1] = AltFunc::SDA0;
+                funkcjeAlt[2] = AltFunc::SA5;
+                funkcjeAlt[3] = AltFunc::PCLK;
+                funkcjeAlt[4] = AltFunc::SPI3_CE0_N;
+                funkcjeAlt[5] = AltFunc::TXD2;
+                funkcjeAlt[6] = AltFunc::SDA6;
                 break;
-                
+
             case 28:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_TX_D2;
-                funkcjeAlt[2] = AltFunc::I2C3_SCL;
-                funkcjeAlt[3] = AltFunc::R_I2S3_SCLK;
-                funkcjeAlt[4] = AltFunc::PWM8;
+                funkcjeAlt[1] = AltFunc::SCL0;
+                funkcjeAlt[2] = AltFunc::SA4;
+                funkcjeAlt[3] = AltFunc::DE;
+                funkcjeAlt[4] = AltFunc::SPI3_MISO;
+                funkcjeAlt[5] = AltFunc::RXD2;
+                funkcjeAlt[6] = AltFunc::SCL6;
                 break;
-                
+
             case 29:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_RXDV;
-                funkcjeAlt[2] = AltFunc::UART1_TXD;
-                funkcjeAlt[3] = AltFunc::PWM1;
-                funkcjeAlt[4] = AltFunc::PCIe0_PERSTN;
+                funkcjeAlt[1] = AltFunc::GPCLK1;
+                funkcjeAlt[2] = AltFunc::SA0;
+                funkcjeAlt[3] = AltFunc::DPI_D1;
+                funkcjeAlt[4] = AltFunc::SPI4_MISO;
+                funkcjeAlt[5] = AltFunc::RXD3;
+                funkcjeAlt[6] = AltFunc::SCL3;
                 break;
-                
+
             case 31:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_RX_D0;
-                funkcjeAlt[2] = AltFunc::UART1_RXD;
-                funkcjeAlt[3] = AltFunc::PWM2;
-                funkcjeAlt[4] = AltFunc::PCIe0_WAKEN;
+                funkcjeAlt[1] = AltFunc::GPCLK2;
+                funkcjeAlt[2] = AltFunc::SOE_N;
+                funkcjeAlt[3] = AltFunc::DPI_D2;
+                funkcjeAlt[4] = AltFunc::SPI4_MOSI;
+                funkcjeAlt[5] = AltFunc::CTS3;
+                funkcjeAlt[6] = AltFunc::SDA4;
                 break;
-                
+
             case 32:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_RX_D3;
-                funkcjeAlt[2] = AltFunc::UART4_RXD;
-                funkcjeAlt[3] = AltFunc::PWM4;
-                funkcjeAlt[4] = AltFunc::PCIe1_CLKREQN;
+                funkcjeAlt[1] = AltFunc::PWM0;
+                funkcjeAlt[2] = AltFunc::SD4;
+                funkcjeAlt[3] = AltFunc::DPI_D8;
+                funkcjeAlt[4] = AltFunc::SPI5_CE0_N;
+                funkcjeAlt[5] = AltFunc::TXD5;
+                funkcjeAlt[6] = AltFunc::SDA5;
                 break;
-                
+
             case 33:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_RX_D1;
-                funkcjeAlt[2] = AltFunc::UART1_CTS_N;
-                funkcjeAlt[3] = AltFunc::_32K_OUT;
-                funkcjeAlt[4] = AltFunc::PCIe0_CLKREQN;
+                funkcjeAlt[1] = AltFunc::PWM1;
+                funkcjeAlt[2] = AltFunc::SD5;
+                funkcjeAlt[3] = AltFunc::DPI_D9;
+                funkcjeAlt[4] = AltFunc::SPI5_MISO;
+                funkcjeAlt[5] = AltFunc::RXD5;
+                funkcjeAlt[6] = AltFunc::SCL5;
                 break;
-                
+
             case 35:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_RX_CLK;
-                funkcjeAlt[2] = AltFunc::UART1_RTS_N;
-                funkcjeAlt[3] = AltFunc::PCIe1_PERSTN;
+                funkcjeAlt[1] = AltFunc::PCM_FS;
+                funkcjeAlt[2] = AltFunc::SD11;
+                funkcjeAlt[3] = AltFunc::DPI_D15;
+                funkcjeAlt[4] = AltFunc::SPI6_MISO;
+                funkcjeAlt[5] = AltFunc::SPI1_MISO;
+                funkcjeAlt[6] = AltFunc::PWM1;
                 break;
-                
+
             case 36:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_TX_D0;
-                funkcjeAlt[2] = AltFunc::UART4_CTS_N;
-                funkcjeAlt[3] = AltFunc::PWM5;
-                funkcjeAlt[4] = AltFunc::PCIe2_PERSTN;
+                funkcjeAlt[1] = AltFunc::FL0;
+                funkcjeAlt[2] = AltFunc::SD8;
+                funkcjeAlt[3] = AltFunc::DPI_D12;
+                funkcjeAlt[4] = AltFunc::CTS0;
+                funkcjeAlt[5] = AltFunc::SPI1_CE2_N;
+                funkcjeAlt[6] = AltFunc::CTS1;
                 break;
-                
+
             case 37:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_RX_D2;
-                funkcjeAlt[2] = AltFunc::UART4_TXD;
-                funkcjeAlt[3] = AltFunc::PWM3;
-                funkcjeAlt[4] = AltFunc::PCIe1_WAKEN;
+                funkcjeAlt[1] = AltFunc::SD0_DAT2;
+                funkcjeAlt[2] = AltFunc::TE0;
+                funkcjeAlt[3] = AltFunc::DPI_D22;
+                funkcjeAlt[4] = AltFunc::SD1_DAT2;
+                funkcjeAlt[5] = AltFunc::ARM_TDI;
+                funkcjeAlt[6] = AltFunc::SPI5_CE1_N;
                 break;
-                
+
             case 38:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_CLK_REF;
-                funkcjeAlt[2] = AltFunc::PWM16;
+                funkcjeAlt[1] = AltFunc::PCM_DIN;
+                funkcjeAlt[2] = AltFunc::SD12;
+                funkcjeAlt[3] = AltFunc::DPI_D16;
+                funkcjeAlt[4] = AltFunc::SPI6_MOSI;
+                funkcjeAlt[5] = AltFunc::SPI1_MOSI;
+                funkcjeAlt[6] = AltFunc::GPCLK0;
                 break;
-                
+
             case 40:
                 funkcjeAlt[0] = AltFunc::GPIO;
-                funkcjeAlt[1] = AltFunc::GMAC1_TX;
-                funkcjeAlt[2] = AltFunc::PWM7;
-                funkcjeAlt[3] = AltFunc::PCIe2_CLKREQN;
+                funkcjeAlt[1] = AltFunc::PCM_DOUT;
+                funkcjeAlt[2] = AltFunc::SD13;
+                funkcjeAlt[3] = AltFunc::DPI_D17;
+                funkcjeAlt[4] = AltFunc::SPI6_SCLK;
+                funkcjeAlt[5] = AltFunc::SPI1_SCLK;
+                funkcjeAlt[6] = AltFunc::GPCLK1;
                 break;
-                
+
             default:
                 delete[] funkcjeAlt;
                 return nullptr;
@@ -352,9 +405,24 @@ Direction Pin::getDirection() const
 {
     return state;
 }
+
+void Pin::applyPullDefault()
+{
+    if (currentFunc != AltFunc::GPIO || state != Direction::Input)
+        return;
+
+    if (pull == Pull::Up)
+        value = Level::High;
+    else if (pull == Pull::Down)
+        value = Level::Low;
+    else
+        value = Level::None;
+}
+
 void Pin::setPull(Pull _pull)
 {
     pull = _pull;
+    applyPullDefault();
 }
 void Pin::setValue(Level _level)
 {
@@ -363,6 +431,7 @@ void Pin::setValue(Level _level)
 void Pin::setDirection(Direction _state)
 {
     state = _state;
+    applyPullDefault();
 }
 
 
@@ -385,6 +454,7 @@ bool Pin::setAltFunc(AltFunc newFunc)
                 state = Direction::None; 
             } else {
                 state = Direction::Input; 
+                applyPullDefault();
             }
 
             return true; 

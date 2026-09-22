@@ -30,6 +30,8 @@ enum class Direction
 class Pin
 {
 private:
+    void applyPullDefault();
+
     usi id;
     usi bcm;
     std::string name;
